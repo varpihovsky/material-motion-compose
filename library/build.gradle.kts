@@ -10,8 +10,13 @@ plugins {
     id("org.jetbrains.compose")
 }
 
+group = "soup.compose.material"
+version = "0.6.4"
+
 kotlin {
-    android()
+    android{
+        publishLibraryVariants("release")
+    }
 
     sourceSets {
         val commonMain by getting {
@@ -22,12 +27,14 @@ kotlin {
             }
 
         }
-        val androidTest by getting {
-            dependencies {
-                implementation(Libs.Compose.ui_test_junit4)
-                implementation(Libs.Compose.ui_test_manifest)
-                implementation(Libs.AndroidX.Test.rules)
-                implementation(Libs.AndroidX.Test.runner)
+    }
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.fornewid"
+                artifactId = "material-motion-compose"
+                version = "0.6.4"
             }
         }
     }
@@ -63,18 +70,5 @@ android {
         // our test APK to build (has no effect on our AARs)
         exclude("/META-INF/AL2.0")
         exclude("/META-INF/LGPL2.1")
-    }
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-                groupId = "com.github.fornewid"
-                artifactId = "material-motion-compose"
-                version = "0.4.7"
-            }
-        }
     }
 }
