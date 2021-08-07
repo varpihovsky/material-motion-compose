@@ -31,7 +31,6 @@ kotlin {
     publishing {
         publications {
             create<MavenPublication>("release") {
-                from(components["release"])
                 groupId = "com.github.fornewid"
                 artifactId = "material-motion-compose"
                 version = "0.6.4"
