@@ -9,6 +9,7 @@ object Versions {
 
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0"
+    const val composeGradlePlugin = "org.jetbrains.compose:compose-gradle-plugin:1.0.0-alpha2"
     const val material = "com.google.android.material:material:1.4.0"
 
     object Kotlin {
