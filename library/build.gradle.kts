@@ -9,9 +9,6 @@ plugins {
     id("maven-publish")
 }
 
-group = "com.github.fornewid"
-version = "0.6.2"
-
 kotlin {
     android()
 
@@ -36,25 +33,23 @@ kotlin {
 }
 
 android {
-    compileSdkVersion(Versions.compileSdk)
+    compileSdk = Versions.compileSdk
     defaultConfig {
-        minSdkVersion(Versions.minSdk)
-        targetSdkVersion(Versions.targetSdk)
+        minSdk = Versions.minSdk
+        targetSdk = Versions.targetSdk
 
-        // testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
     buildFeatures {
-        buildConfig = false
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "${Libs.Compose.version}"
-    }
-    lintOptions {
-        textReport = true
-        textOutput = file("stdout")
-        isCheckReleaseBuilds = false
+        kotlinCompilerExtensionVersion = Libs.Compose.version
     }
     testOptions {
         unitTests {
@@ -64,8 +59,8 @@ android {
     packagingOptions {
         // Multiple dependencies bring these files in. Exclude them to enable
         // our test APK to build (has no effect on our AARs)
-        excludes += "/META-INF/AL2.0"
-        excludes += "/META-INF/LGPL2.1"
+        exclude("/META-INF/AL2.0")
+        exclude("/META-INF/LGPL2.1")
     }
 }
 
@@ -76,7 +71,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.fornewid"
                 artifactId = "material-motion-compose"
-                version = "0.6.2"
+                version = "0.4.7"
             }
         }
     }
