@@ -9,6 +9,9 @@ plugins {
     id("maven-publish")
 }
 
+group = "com.github.fornewid"
+version = "0.6.2"
+
 kotlin {
     android()
 
